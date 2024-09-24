@@ -1,0 +1,47 @@
+<odoo>
+  <record id="payment_provider_form_viettelpay" model="ir.ui.view">
+    <!-- Set the name of the view -->
+    <field name="name">ViettelPay Provider Form</field>
+    <!-- Set the model that this view is related to -->
+    <field name="model">payment.provider</field>
+    <!-- Inherit from the existing "payment.provider.form" view -->
+    <field name="inherit_id" ref="payment.payment_provider_form" />
+    <!-- Define the architecture of the view -->
+    <field name="arch" type="xml">
+      <!-- Find the group named "provider_credentials" -->
+      <xpath expr="//group[@name='provider_credentials']" position="inside">
+        <!-- Define a new group that is only visible when the code is "viettelpay" -->
+        <group name="viettelpay_credentials" groups="base.group_user">
+          <!-- Define a field for the Merchant Code (viettelpay_merchant_code) -->
+          <field name="viettelpay_merchant_code"
+            string="Merchant Code"
+            required="code == 'viettelpay' and state != 'disabled'"
+          />
+          <!-- Define a field for the Hash Key (viettelpay_hash_secret) -->
+          <field name="viettelpay_hash_secret"
+            string="Hash Key"
+            required="code == 'viettelpay' and state != 'disabled'"
+            password="True"
+          />
+          <!-- Define a field for the Access Code -->
+          <field name="viettelpay_access_code"
+            string="Access Code"
+            required="code == 'viettelpay' and state != 'disabled'"
+            password="True"
+          />
+          <!-- Define a field for the Payment URL (viettelpay_payment_link) -->
+          <field name="viettelpay_payment_link"
+            string="ViettelPay URL"
+            required="code == 'viettelpay' and state != 'disabled'"
+          />
+          <!-- Define a field for the White List IPs -->
+          <field name="viettelpay_white_list_ip"
+            string="White List IPs"
+            required="code == 'viettelpay' and state != 'disabled'"
+            placeholder="Enter IPs separated by commas"
+          />
+        </group>
+      </xpath>
+    </field>
+  </record>
+</odoo>
